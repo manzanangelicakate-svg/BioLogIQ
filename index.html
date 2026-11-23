@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071b20">
+    <title>BIOLOGIQ | Biology Adventure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ANIMATED LABORATORY BACKGROUND -->
+<div class="lab-atmosphere" aria-hidden="true">
+    <div class="ambient-glow glow-one"></div>
+    <div class="ambient-glow glow-two"></div>
+    <div class="ambient-glow glow-three"></div>
+    <div class="dna-decoration dna-one">✧</div>
+    <div class="dna-decoration dna-two">✧</div>
+    <div id="lab-particles"></div>
+    <div id="lab-bubbles"></div>
+</div>
+
+<header class="topbar">
+    <div class="brand">🧬 BIOLOGIQ</div>
+    <div class="hud">
+        <span id="xp-display">⚡ 0 XP</span>
+        <button class="small-btn" onclick="showScreen('home-screen')">HOME</button>
+    </div>
+</header>
+
+<main>
+
+    <!-- HOME -->
+    <section id="home-screen" class="screen active">
+        <div class="hero">
+            <div>
+                <p class="eyebrow">AN INTERACTIVE BIOLOGY ADVENTURE</p>
+                <h1>Welcome to <span>BIOLOGIQ</span></h1>
+                <p>Discover how cells transform nutrients into usable energy through interactive lessons and challenges.</p>
+                <button class="primary-btn" onclick="startAdventure()">START ADVENTURE →</button>
+                <button class="secondary-btn"
+                  id="replay-snake-btn"
+                 onclick="replaySnakeGame()">
+                🐍 REVISIT SNAKE GAME</button>
+            </div>
+            <div class="hero-visual">🧬</div>
+        </div>
+
+        <div class="home-cards">
+            <article class="info-card">
+                <span>01</span>
+                <h3>Learn</h3>
+                <p>Explore the four stages of cellular respiration.</p>
+            </article>
+            <article class="info-card">
+                <span>02</span>
+                <h3>Interact</h3>
+                <p>Complete activities and manipulate learning challenges.</p>
+            </article>
+            <article class="info-card">
+                <span>03</span>
+                <h3>Master</h3>
+                <p>Answer five questions after every lesson.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- PRAYER -->
+    <section id="prayer-screen" class="screen centered-screen">
+        <div class="content-panel">
+            <p class="eyebrow">BEFORE WE BEGIN</p>
+            <div class="large-icon">🙏</div>
+            <h1>Opening Prayer</h1>
+            <p class="prayer-text">
+                Heavenly Father, thank You for giving us this day and the opportunity to learn.
+                Guide us as we explore the wonders of life and understand the processes that
+                sustain living organisms. Give us wisdom, patience, and curiosity as we study.
+                May we use the knowledge we gain for good and continue to appreciate the beauty
+                of Your creation. Amen.
+            </p>
+            <button class="primary-btn" onclick="goToLab()">AMEN — LET'S BEGIN →</button>
+        </div>
+    </section>
+
+    <!-- LABORATORY -->
+    <section id="lab-screen" class="screen">
+        <div class="lab-overlay">
+            <div class="lab-content">
+                <p class="eyebrow">WELCOME, RESEARCHER</p>
+                <h1>INTERACTIVE<br><span>BIOLOGY LAB</span></h1>
+                <p>Your mission is to discover how cells convert nutrients into usable energy.</p>
+                <button class="primary-btn" onclick="enterLab()">ENTER THE LABORATORY →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE MENU -->
+    <section id="modules-screen" class="screen">
+        <div class="section-heading">
+            <p class="eyebrow">YOUR LEARNING JOURNEY</p>
+            <h1>Choose a Learning Module</h1>
+            <p>Complete the lesson, mini-game, and five-item quiz for each topic.</p>
+        </div>
+
+        <div class="module-grid">
+            <button class="module-card" onclick="openModule(0)">
+                <span class="module-icon">🍬</span>
+                <h2>Glycolysis</h2>
+                <p>Breaking down glucose</p>
+                <span class="module-status" id="status-0">NOT STARTED</span>
+            </button>
+
+            <button class="module-card" onclick="openModule(1)">
+                <span class="module-icon">🔄</span>
+                <h2>Krebs Cycle</h2>
+                <p>Harvesting energy carriers</p>
+                <span class="module-status" id="status-1">NOT STARTED</span>
+            </button>
+
+            <button class="module-card" onclick="openModule(2)">
+                <span class="module-icon">⚡</span>
+                <h2>Electron Transport Chain</h2>
+                <p>Transferring high-energy electrons</p>
+                <span class="module-status" id="status-2">NOT STARTED</span>
+            </button>
+
+            <button class="module-card" onclick="openModule(3)">
+                <span class="module-icon">💧</span>
+                <h2>Chemiosmosis</h2>
+                <p>Producing ATP through a proton gradient</p>
+                <span class="module-status" id="status-3">NOT STARTED</span>
+            </button>
+        </div>
+
+        <div class="overall-progress">
+            <div class="row-between">
+                <strong>Learning Progress</strong>
+                <span id="module-progress-label">0 / 4 completed</span>
+            </div>
+            <div class="progress-track">
+                <div id="module-progress" class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON -->
+    <section id="lesson-screen" class="screen">
+        <div class="lesson-top">
+            <button class="text-btn" onclick="showModules()">← MODULES</button>
+            <span id="lesson-count">MODULE 01 OF 04</span>
+        </div>
+
+        <div class="lesson-hero">
+            <div>
+                <p class="eyebrow">CELLULAR RESPIRATION</p>
+                <h1 id="lesson-title"></h1>
+                <p id="lesson-subtitle"></p>
+            </div>
+            <div class="lesson-icon" id="lesson-icon"></div>
+        </div>
+
+        <div class="lesson-content">
+            <article class="lesson-card">
+                <h2>📖 Lesson Overview</h2>
+                <p id="lesson-overview"></p>
+            </article>
+
+            <article class="lesson-card">
+                <h2>⚙️ How the Process Works</h2>
+                <div id="lesson-process"></div>
+            </article>
+
+            <article class="lesson-card">
+                <h2>🧪 Important Molecules</h2>
+                <div id="lesson-molecules" class="molecule-grid"></div>
+            </article>
+
+            <article class="lesson-card">
+                <h2>📊 Inputs and Outputs</h2>
+                <div id="lesson-input-output"></div>
+            </article>
+
+            <article class="lesson-card">
+                <h2>💡 Remember This!</h2>
+                <p id="lesson-takeaway"></p>
+            </article>
+        </div>
+
+        <div class="lesson-actions">
+            <button class="secondary-btn" onclick="showModules()">BACK TO MODULES</button>
+            <button class="primary-btn" onclick="startMiniGame()">START MINI-GAME →</button>
+        </div>
+    </section>
+
+    <!-- MINI-GAME -->
+    <section id="game-screen" class="screen">
+        <div class="section-heading">
+            <p class="eyebrow">INTERACTIVE CHALLENGE</p>
+            <h1 id="game-title">Mini-Game</h1>
+            <p id="game-instructions"></p>
+        </div>
+
+        <div class="game-panel">
+            <div id="game-area"></div>
+            <div id="game-feedback" class="feedback hidden"></div>
+
+            <div class="game-actions">
+                <button class="secondary-btn" onclick="openModule(currentModule)">REVIEW LESSON</button>
+                <button id="game-finish-btn" class="primary-btn" onclick="finishMiniGame()" disabled>
+                    COMPLETE CHALLENGE →
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 3D BIOLOGY MODEL -->
+    <section id="model-screen" class="screen">
+        <div class="model-heading">
+            <p class="eyebrow">POST-GAME EXPLORATION</p>
+            <h1 id="model-title">Explore the 3D Model</h1>
+            <p id="model-subtitle">Examine the structures and follow the major steps of this process.</p>
+        </div>
+
+        <div class="model-panel">
+            <div class="model-toolbar">
+                <span class="model-tag">3D BIOLOGY VIEWER</span>
+                <button class="small-btn" id="model-rotate-btn" onclick="toggleModelRotation()">PAUSE ROTATION</button>
+            </div>
+            <div id="model-visual" class="model-visual" aria-label="Animated 3D-style biological model"></div>
+            <div class="model-caption">
+                <h2 id="model-caption-title">How it works</h2>
+                <p id="model-description"></p>
+            </div>
+            <div id="model-facts" class="model-facts"></div>
+            <div class="model-actions">
+                <button class="secondary-btn" onclick="openModule(currentModule)">REVIEW LESSON</button>
+                <button class="primary-btn" onclick="continueFromModel()">CONTINUE TO 5-ITEM QUIZ →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIVE-ITEM QUIZ -->
+    <section id="checkpoint-screen" class="screen">
+        <div class="quiz-container">
+            <div class="section-heading">
+                <p class="eyebrow">MODULE CHECKPOINT</p>
+                <h1 id="checkpoint-title">Knowledge Check</h1>
+                <p>Choose the best answer. Read the feedback after submitting your response.</p>
+            </div>
+
+            <div class="progress-track">
+                <div id="checkpoint-progress" class="progress-fill"></div>
+            </div>
+
+            <div class="quiz-meta">
+                <span id="checkpoint-number">Question 1 of 5</span>
+                <span id="checkpoint-topic-label"></span>
+            </div>
+
+            <div class="question-card">
+                <h2 id="checkpoint-question"></h2>
+                <div id="checkpoint-options" class="options-list"></div>
+                <div id="checkpoint-feedback" class="feedback hidden"></div>
+                <button id="checkpoint-next" class="primary-btn hidden" onclick="nextCheckpointQuestion()">
+                    NEXT QUESTION →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE RESULT -->
+    <section id="checkpoint-result-screen" class="screen centered-screen">
+        <div class="content-panel">
+            <p class="eyebrow">MODULE COMPLETED</p>
+            <div class="large-icon">🏆</div>
+            <h1 id="checkpoint-result-title">Great Work!</h1>
+            <div class="score-display" id="checkpoint-score">0 / 5</div>
+            <p id="checkpoint-result-message"></p>
+            <p class="xp-earned" id="checkpoint-xp-earned">+0 XP</p>
+            <button class="primary-btn" onclick="continueAfterCheckpoint()">CONTINUE →</button>
+        </div>
+    </section>
+
+    <!-- FINAL RESULT -->
+    <section id="final-screen" class="screen centered-screen">
+        <div class="content-panel final-panel">
+            <p class="eyebrow">BIOLOGIQ ADVENTURE COMPLETED</p>
+            <div class="large-icon">🎓</div>
+            <h1>Congratulations, Researcher!</h1>
+            <p>You have completed all four stages of cellular respiration.</p>
+
+            <div class="final-stats">
+                <div>
+                    <span id="final-score">0 / 20</span>
+                    <small>CHECKPOINT SCORE</small>
+                </div>
+                <div>
+                    <span id="final-percentage">0%</span>
+                    <small>OVERALL PERCENTAGE</small>
+                </div>
+                <div>
+                    <span id="final-xp">0</span>
+                    <small>TOTAL XP</small>
+                </div>
+            </div>
+
+            <section class="final-breakdown-panel">
+                <h2>Performance Breakdown</h2>
+                <p class="breakdown-intro">Your score in each cellular respiration topic:</p>
+                <div id="final-breakdown" class="final-breakdown"></div>
+            </section>
+
+            <p id="final-message"></p>
+            <button class="primary-btn" onclick="restartAdventure()">PLAY AGAIN ↻</button>
+            <button class="secondary-btn" onclick="showScreen('home-screen')">BACK TO HOME</button>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>🧬 BIOLOGIQ | Interactive Digital Learning Material in General Biology</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

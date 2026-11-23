@@ -1,0 +1,1810 @@
+:root {
+    --background: #071b20;
+    --panel: #102c32;
+    --panel-light: #173a40;
+    --teal: #35d0bd;
+    --teal-dark: #159b91;
+    --white: #f3fbf9;
+    --muted: #a9c4c1;
+    --border: rgba(255,255,255,0.12);
+    --good: #5de3a0;
+    --bad: #ff7777;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--background);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+.topbar {
+    height: 72px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0b242a;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--teal);
+}
+
+.hud {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-weight: bold;
+}
+
+#xp-display {
+    color: #ffd66b;
+}
+
+.small-btn,
+.text-btn {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+}
+
+main {
+    width: 100%;
+    min-height: calc(100vh - 130px);
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 1150px;
+    margin: auto;
+    padding: 55px 6%;
+    animation: screenFade 0.35s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes screenFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin: 12px 0 18px;
+}
+
+h2 {
+    line-height: 1.3;
+}
+
+p {
+    color: var(--muted);
+}
+
+.eyebrow {
+    color: var(--teal);
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 13px 22px;
+    border-radius: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: var(--teal);
+    color: #062226;
+}
+
+.primary-btn:hover:not(:disabled) {
+    background: #6ce8d7;
+    transform: translateY(-2px);
+}
+
+.primary-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    color: var(--white);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* HOME */
+
+.hero {
+    min-height: 390px;
+    padding: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: linear-gradient(120deg, #123a40, #0c282e);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+.hero > div:first-child {
+    max-width: 650px;
+}
+
+.hero h1 span,
+.lab-content h1 span {
+    color: var(--teal);
+}
+
+.hero-visual {
+    font-size: clamp(6rem, 16vw, 12rem);
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.info-card,
+.lesson-card {
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.info-card span {
+    color: var(--teal);
+    font-weight: bold;
+}
+
+.info-card h3 {
+    margin: 8px 0;
+}
+
+/* CENTERED SCREENS */
+
+.centered-screen {
+    min-height: 75vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-screen.active {
+    display: flex;
+}
+
+.content-panel {
+    width: min(100%, 720px);
+    padding: 45px;
+    text-align: center;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+.large-icon {
+    font-size: 4rem;
+    margin: 15px 0;
+}
+
+.prayer-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin: 20px 0 28px;
+    color: var(--white);
+}
+
+/* LAB */
+
+#lab-screen {
+    max-width: none;
+    width: 100%;
+    min-height: calc(100vh - 130px);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, rgba(3,16,22,.88), rgba(3,20,25,.42)),
+        radial-gradient(ellipse at 78% 35%, rgba(49, 213, 196, .16), transparent 34%),
+        linear-gradient(180deg, #102f39, #071b20 75%);
+}
+
+.lab-overlay {
+    min-height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    padding: 8%;
+}
+
+.lab-content {
+    max-width: 650px;
+}
+
+.lab-content h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+}
+
+.lab-content p:not(.eyebrow) {
+    color: #e2f2ef;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+#lab-screen.lab-entered {
+    animation: laboratoryEntrance 0.8s ease forwards;
+}
+
+@keyframes laboratoryEntrance {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* MODULES */
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.module-card {
+    text-align: left;
+    padding: 25px;
+    border-radius: 16px;
+    background: var(--panel);
+    color: var(--white);
+    border: 1px solid var(--border);
+    transition: 0.2s;
+}
+
+.module-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-3px);
+}
+
+.module-icon {
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.module-card p {
+    margin: 5px 0 15px;
+}
+
+.module-status {
+    color: var(--teal);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.overall-progress {
+    margin-top: 30px;
+}
+
+.row-between,
+.quiz-meta,
+.lesson-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-track {
+    height: 9px;
+    background: #203c41;
+    border-radius: 30px;
+    overflow: hidden;
+    margin: 12px 0 25px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--teal);
+    border-radius: 30px;
+    transition: width 0.3s;
+}
+
+/* LESSON */
+
+.lesson-top {
+    margin-bottom: 25px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.lesson-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 35px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #123a40, #0c282e);
+    border: 1px solid var(--border);
+    margin-bottom: 22px;
+}
+
+.lesson-hero > div:first-child {
+    max-width: 750px;
+}
+
+.lesson-icon {
+    font-size: 5rem;
+}
+
+.lesson-content {
+    display: grid;
+    gap: 16px;
+}
+
+.lesson-card h2 {
+    color: var(--teal);
+    margin-bottom: 13px;
+}
+
+.lesson-card p {
+    line-height: 1.8;
+}
+
+.process-step {
+    padding: 15px;
+    border-left: 3px solid var(--teal);
+    background: rgba(255,255,255,0.035);
+    margin: 10px 0;
+    border-radius: 0 9px 9px 0;
+}
+
+.process-step strong {
+    display: block;
+    color: var(--white);
+    margin-bottom: 4px;
+}
+
+.molecule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.molecule {
+    background: var(--panel-light);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.molecule strong {
+    display: block;
+    color: var(--teal);
+}
+
+.lesson-actions,
+.game-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* GAME */
+
+.game-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.game-question {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.game-options {
+    display: grid;
+    gap: 12px;
+}
+
+.game-option {
+    background: var(--panel-light);
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.game-option:hover:not(:disabled) {
+    border-color: var(--teal);
+}
+
+.game-option.correct {
+    border-color: var(--good);
+    background: rgba(93,227,160,0.12);
+}
+
+.game-option.wrong {
+    border-color: var(--bad);
+    background: rgba(255,119,119,0.10);
+}
+
+/* QUIZ */
+
+.quiz-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.quiz-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.question-card {
+    padding: 30px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.question-card h2 {
+    margin-bottom: 24px;
+    font-size: 1.35rem;
+}
+
+.options-list {
+    display: grid;
+    gap: 12px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    color: var(--white);
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--teal);
+}
+
+.option-letter {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #24484d;
+    color: var(--teal);
+    font-weight: bold;
+}
+
+.option-btn.correct {
+    border-color: var(--good);
+    background: rgba(93,227,160,0.12);
+}
+
+.option-btn.wrong {
+    border-color: var(--bad);
+    background: rgba(255,119,119,0.10);
+}
+
+.option-btn:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 17px;
+    border-radius: 10px;
+    background: var(--panel-light);
+    line-height: 1.7;
+}
+
+.feedback.good {
+    border-left: 4px solid var(--good);
+}
+
+.feedback.bad {
+    border-left: 4px solid var(--bad);
+}
+
+#checkpoint-next {
+    margin-top: 18px;
+}
+
+/* RESULTS */
+
+.score-display {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--teal);
+    margin: 15px 0;
+}
+
+.xp-earned {
+    color: #ffd66b;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 18px 0;
+}
+
+.final-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.final-stats div {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--panel-light);
+}
+
+.final-stats span {
+    display: block;
+    color: var(--teal);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.final-stats small {
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+.final-panel .secondary-btn {
+    margin-top: 12px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 22px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+    .screen {
+        padding: 30px 5%;
+    }
+
+    .hero {
+        padding: 30px;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .home-cards,
+    .module-grid,
+    .molecule-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-hero {
+        padding: 25px;
+    }
+
+    .lesson-icon {
+        font-size: 3rem;
+    }
+
+    .content-panel {
+        padding: 28px 20px;
+    }
+
+    .lesson-actions,
+    .game-actions {
+        flex-direction: column;
+    }
+
+    .lesson-actions button,
+    .game-actions button {
+        width: 100%;
+    }
+
+    .question-card {
+        padding: 20px;
+    }
+
+    .topbar {
+        padding: 0 4%;
+    }
+}
+/* ==========================================
+   INTERACTIVE MINI-GAMES
+========================================== */
+
+.game-instructions {
+    margin-bottom: 20px;
+}
+
+.game-progress {
+    margin: 15px 0 22px;
+}
+
+.game-progress-label {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.game-board {
+    padding: 22px;
+    background: #0b242a;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin: 15px 0;
+}
+
+.game-board h3 {
+    color: var(--teal);
+    margin-bottom: 12px;
+}
+
+.game-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.game-choice {
+    padding: 16px;
+    background: var(--panel-light);
+    color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: left;
+    transition: 0.2s;
+}
+
+.game-choice:hover:not(:disabled) {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+}
+
+.game-choice:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.game-choice.correct {
+    border-color: var(--good);
+    background: rgba(93,227,160,0.12);
+}
+
+.game-choice.wrong {
+    border-color: var(--bad);
+    background: rgba(255,119,119,0.12);
+}
+
+.game-sequence {
+    display: grid;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.sequence-item {
+    padding: 13px 16px;
+    border: 1px dashed var(--border);
+    border-radius: 9px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.025);
+}
+
+.sequence-item.filled {
+    border: 1px solid var(--teal-dark);
+    color: var(--white);
+    background: rgba(53,208,189,0.08);
+}
+
+.sequence-item small {
+    display: block;
+    color: var(--teal);
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.game-feedback {
+    min-height: 55px;
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--panel-light);
+    line-height: 1.6;
+}
+
+.game-feedback.good {
+    border-left: 4px solid var(--good);
+}
+
+.game-feedback.bad {
+    border-left: 4px solid var(--bad);
+}
+
+.game-stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.game-stat {
+    padding: 16px;
+    background: var(--panel-light);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.game-stat strong {
+    display: block;
+    font-size: 1.7rem;
+    color: var(--teal);
+}
+
+.game-stat span {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.proton-field {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    min-height: 65px;
+    padding: 15px;
+    background: #0b242a;
+    border: 1px dashed var(--teal-dark);
+    border-radius: 12px;
+    margin: 12px 0;
+}
+
+.proton {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: #062226;
+    background: var(--teal);
+    font-weight: 900;
+    animation: protonAppear 0.25s ease;
+}
+
+@keyframes protonAppear {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.game-control {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.game-control button {
+    min-width: 190px;
+}
+
+@media (max-width: 600px) {
+    .game-choice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-board {
+        padding: 16px;
+    }
+}
+/* ==========================================
+   BIOLOGIQ - ANIMATED LABORATORY ATMOSPHERE
+========================================== */
+
+body {
+    position: relative;
+    isolation: isolate;
+    overflow-x: hidden;
+    background: #071b20;
+}
+
+/* Keep the website content above the animated background */
+.topbar,
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Background layer */
+.lab-atmosphere {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(4, 20, 26, .76), rgba(4, 20, 26, .88)),
+        repeating-linear-gradient(90deg, transparent 0 11%, rgba(112, 224, 214, .035) 11.2% 11.35%, transparent 11.6% 22%),
+        radial-gradient(ellipse at 15% 20%, rgba(22, 126, 125, .22), transparent 45%),
+        radial-gradient(ellipse at 85% 75%, rgba(29, 104, 130, .22), transparent 45%),
+        linear-gradient(145deg, #102e38, #071b20 68%, #0c3034);
+}
+
+/* Moving ambient lights */
+.ambient-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.22;
+    animation: glowMovement 16s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    background: #1bc8b4;
+    top: -150px;
+    left: -100px;
+}
+
+.glow-two {
+    background: #147caa;
+    right: -120px;
+    top: 30%;
+    animation-delay: -5s;
+}
+
+.glow-three {
+    background: #25a78c;
+    left: 35%;
+    bottom: -220px;
+    animation-delay: -9s;
+}
+
+@keyframes glowMovement {
+    0% {
+        transform: translate(0, 0) scale(0.9);
+    }
+    50% {
+        transform: translate(100px, 70px) scale(1.2);
+    }
+    100% {
+        transform: translate(-60px, 130px) scale(1);
+    }
+}
+
+/* Floating particles */
+#lab-particles,
+#lab-bubbles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.lab-particle {
+    position: absolute;
+    bottom: -20px;
+    left: var(--left);
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: rgba(90, 239, 218, 0.8);
+    box-shadow: 0 0 12px rgba(53, 208, 189, 0.8);
+    opacity: 0;
+    animation: particleFloat var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.65;
+    }
+    80% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate3d(var(--drift), -110vh, 0);
+        opacity: 0;
+    }
+}
+
+/* Laboratory bubbles */
+.lab-bubble {
+    position: absolute;
+    left: var(--left);
+    bottom: -80px;
+    width: var(--size);
+    height: var(--size);
+    border: 1px solid rgba(118, 240, 222, 0.35);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.22),
+        rgba(53, 208, 189, 0.025) 65%
+    );
+    box-shadow: inset 0 0 12px rgba(53, 208, 189, 0.12);
+    animation: bubbleRise var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes bubbleRise {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.55;
+    }
+    85% {
+        opacity: 0.35;
+    }
+    100% {
+        transform: translate3d(var(--drift), -115vh, 0) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* DNA-inspired floating decorations */
+.dna-decoration {
+    position: absolute;
+    color: rgba(53, 208, 189, 0.12);
+    font-size: 12rem;
+    line-height: 1;
+    animation: dnaFloat 12s ease-in-out infinite alternate;
+}
+
+.dna-one {
+    top: 12%;
+    right: 5%;
+}
+
+.dna-two {
+    bottom: 8%;
+    left: 3%;
+    font-size: 9rem;
+    animation-delay: -5s;
+}
+
+@keyframes dnaFloat {
+    0% {
+        transform: translateY(0) rotate(-12deg);
+    }
+    100% {
+        transform: translateY(-45px) rotate(15deg);
+    }
+}
+
+/* Give cards a glass-like laboratory appearance */
+.hero,
+.lesson-hero,
+.info-card,
+.lesson-card,
+.content-panel,
+.module-card,
+.game-panel,
+.game-board,
+.question-card {
+    background-color: rgba(16, 44, 50, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Subtle movement for the home DNA icon */
+.hero-visual {
+    animation: dnaIconFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 22px rgba(53, 208, 189, 0.25));
+}
+
+@keyframes dnaIconFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+/* Laboratory image movement */
+#lab-screen {
+    background-size: 110% 110%;
+    animation: labBackgroundMovement 22s ease-in-out infinite alternate;
+}
+
+@keyframes labBackgroundMovement {
+    from {
+        background-position: 45% 45%;
+    }
+    to {
+        background-position: 55% 55%;
+    }
+}
+
+/* Smooth entrance when entering the laboratory */
+#lab-screen.lab-entered {
+    animation: laboratoryEntrance 0.8s ease forwards,
+               labBackgroundMovement 22s ease-in-out infinite alternate;
+}
+
+@keyframes laboratoryEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Improve focus visibility for keyboard users */
+button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 4px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+    .ambient-glow {
+        width: 250px;
+        height: 250px;
+        filter: blur(65px);
+    }
+
+    .dna-decoration {
+        font-size: 7rem;
+    }
+
+    #lab-screen {
+        background-size: cover;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* ==========================================
+   BIOLOGIQ - ANIMATED LABORATORY ATMOSPHERE
+========================================== */
+
+body {
+    position: relative;
+    isolation: isolate;
+    overflow-x: hidden;
+    background: #071b20;
+}
+
+/* Keep the website content above the animated background */
+.topbar,
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Background layer */
+.lab-atmosphere {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(4, 20, 26, .76), rgba(4, 20, 26, .88)),
+        repeating-linear-gradient(90deg, transparent 0 11%, rgba(112, 224, 214, .035) 11.2% 11.35%, transparent 11.6% 22%),
+        radial-gradient(ellipse at 15% 20%, rgba(22, 126, 125, .22), transparent 45%),
+        radial-gradient(ellipse at 85% 75%, rgba(29, 104, 130, .22), transparent 45%),
+        linear-gradient(145deg, #102e38, #071b20 68%, #0c3034);
+}
+
+/* Moving ambient lights */
+.ambient-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.22;
+    animation: glowMovement 16s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    background: #1bc8b4;
+    top: -150px;
+    left: -100px;
+}
+
+.glow-two {
+    background: #147caa;
+    right: -120px;
+    top: 30%;
+    animation-delay: -5s;
+}
+
+.glow-three {
+    background: #25a78c;
+    left: 35%;
+    bottom: -220px;
+    animation-delay: -9s;
+}
+
+@keyframes glowMovement {
+    0% {
+        transform: translate(0, 0) scale(0.9);
+    }
+    50% {
+        transform: translate(100px, 70px) scale(1.2);
+    }
+    100% {
+        transform: translate(-60px, 130px) scale(1);
+    }
+}
+
+/* Floating particles */
+#lab-particles,
+#lab-bubbles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.lab-particle {
+    position: absolute;
+    bottom: -20px;
+    left: var(--left);
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: rgba(90, 239, 218, 0.8);
+    box-shadow: 0 0 12px rgba(53, 208, 189, 0.8);
+    opacity: 0;
+    animation: particleFloat var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.65;
+    }
+    80% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate3d(var(--drift), -110vh, 0);
+        opacity: 0;
+    }
+}
+
+/* Laboratory bubbles */
+.lab-bubble {
+    position: absolute;
+    left: var(--left);
+    bottom: -80px;
+    width: var(--size);
+    height: var(--size);
+    border: 1px solid rgba(118, 240, 222, 0.35);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.22),
+        rgba(53, 208, 189, 0.025) 65%
+    );
+    box-shadow: inset 0 0 12px rgba(53, 208, 189, 0.12);
+    animation: bubbleRise var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes bubbleRise {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.55;
+    }
+    85% {
+        opacity: 0.35;
+    }
+    100% {
+        transform: translate3d(var(--drift), -115vh, 0) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* DNA-inspired floating decorations */
+.dna-decoration {
+    position: absolute;
+    color: rgba(53, 208, 189, 0.12);
+    font-size: 12rem;
+    line-height: 1;
+    animation: dnaFloat 12s ease-in-out infinite alternate;
+}
+
+.dna-one {
+    top: 12%;
+    right: 5%;
+}
+
+.dna-two {
+    bottom: 8%;
+    left: 3%;
+    font-size: 9rem;
+    animation-delay: -5s;
+}
+
+@keyframes dnaFloat {
+    0% {
+        transform: translateY(0) rotate(-12deg);
+    }
+    100% {
+        transform: translateY(-45px) rotate(15deg);
+    }
+}
+
+/* Give cards a glass-like laboratory appearance */
+.hero,
+.lesson-hero,
+.info-card,
+.lesson-card,
+.content-panel,
+.module-card,
+.game-panel,
+.game-board,
+.question-card {
+    background-color: rgba(16, 44, 50, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Subtle movement for the home DNA icon */
+.hero-visual {
+    animation: dnaIconFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 22px rgba(53, 208, 189, 0.25));
+}
+
+@keyframes dnaIconFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+/* Laboratory image movement */
+#lab-screen {
+    background-size: 110% 110%;
+    animation: labBackgroundMovement 22s ease-in-out infinite alternate;
+}
+
+@keyframes labBackgroundMovement {
+    from {
+        background-position: 45% 45%;
+    }
+    to {
+        background-position: 55% 55%;
+    }
+}
+
+/* Smooth entrance when entering the laboratory */
+#lab-screen.lab-entered {
+    animation: laboratoryEntrance 0.8s ease forwards,
+               labBackgroundMovement 22s ease-in-out infinite alternate;
+}
+
+@keyframes laboratoryEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Improve focus visibility for keyboard users */
+button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 4px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+    .ambient-glow {
+        width: 250px;
+        height: 250px;
+        filter: blur(65px);
+    }
+
+    .dna-decoration {
+        font-size: 7rem;
+    }
+
+    #lab-screen {
+        background-size: cover;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================
+   BIOLOGIQ - IMMERSIVE LAB ENVIRONMENT
+========================================== */
+.lab-atmosphere::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .55;
+    background:
+        linear-gradient(180deg, transparent 0 13%, rgba(101, 223, 213, .10) 13.2% 13.7%, transparent 14% 100%),
+        linear-gradient(90deg, transparent 0 7%, rgba(118, 231, 218, .12) 7.2% 7.5%, transparent 7.8% 92%, rgba(118, 231, 218, .10) 92.2% 92.5%, transparent 92.8%),
+        linear-gradient(180deg, transparent 0 68%, rgba(37, 106, 112, .20) 68.2% 69%, transparent 69.3%),
+        repeating-linear-gradient(90deg, transparent 0 19.5%, rgba(117, 232, 221, .06) 19.7% 20%, transparent 20.2% 39.5%);
+    animation: labLightSweep 18s ease-in-out infinite alternate;
+}
+.lab-atmosphere::after {
+    content: "";
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: -16%;
+    height: 45%;
+    opacity: .42;
+    transform: perspective(500px) rotateX(62deg);
+    transform-origin: center bottom;
+    background:
+        repeating-linear-gradient(90deg, rgba(75, 209, 197, .13) 0 1px, transparent 1px 90px),
+        repeating-linear-gradient(0deg, rgba(75, 209, 197, .12) 0 1px, transparent 1px 55px);
+    mask-image: linear-gradient(to top, black, transparent);
+}
+@keyframes labLightSweep {
+    from { filter: brightness(.8); transform: translateX(-.5%); }
+    to { filter: brightness(1.25); transform: translateX(.5%); }
+}
+#lab-screen::before,
+#lab-screen::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid rgba(105, 232, 218, .18);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(67, 177, 176, .12), rgba(9, 33, 41, .05));
+    box-shadow: 0 0 35px rgba(34, 205, 189, .08), inset 0 0 28px rgba(34, 205, 189, .06);
+    animation: equipmentFloat 9s ease-in-out infinite alternate;
+}
+#lab-screen::before {
+    width: 23vw;
+    height: 34vh;
+    min-width: 190px;
+    right: 8%;
+    top: 15%;
+}
+#lab-screen::after {
+    width: 16vw;
+    height: 23vh;
+    min-width: 150px;
+    right: 35%;
+    bottom: 8%;
+    animation-delay: -4s;
+}
+@keyframes equipmentFloat {
+    from { transform: translateY(0) rotateY(-4deg); }
+    to { transform: translateY(-12px) rotateY(4deg); }
+}
+.lab-overlay { position: relative; z-index: 1; }
+.lab-content {
+    padding: 28px;
+    border-left: 2px solid var(--teal);
+    background: linear-gradient(90deg, rgba(4, 19, 25, .62), transparent);
+    backdrop-filter: blur(2px);
+}
+
+/* ==========================================
+   POST-GAME 3D MODEL VIEWER
+========================================== */
+.model-heading { margin-bottom: 24px; }
+.model-panel {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(12, 39, 46, .91);
+    box-shadow: 0 22px 60px rgba(0,0,0,.24);
+    backdrop-filter: blur(12px);
+}
+.model-toolbar, .model-label, .breakdown-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.model-tag {
+    color: var(--teal);
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+.model-visual {
+    min-height: 390px;
+    margin: 18px 0;
+    padding: 24px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    perspective: 1100px;
+    border: 1px solid rgba(93, 227, 208, .18);
+    border-radius: 16px;
+    background:
+        radial-gradient(ellipse at center, rgba(29, 130, 127, .20), transparent 58%),
+        linear-gradient(145deg, rgba(5, 22, 29, .96), rgba(12, 49, 55, .92));
+}
+.model-object {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: modelFloat 6s ease-in-out infinite, modelTurn 22s ease-in-out infinite alternate;
+}
+.model-visual.rotation-paused .model-object { animation-play-state: paused; }
+@keyframes modelFloat {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -9px; }
+}
+@keyframes modelTurn {
+    from { rotate: -2deg; }
+    to { rotate: 2deg; }
+}
+.model-caption {
+    padding: 4px 2px 18px;
+    max-width: 900px;
+}
+.model-caption h2 { color: var(--teal); margin-bottom: 7px; }
+.model-caption p { line-height: 1.8; }
+.model-facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+.model-fact {
+    padding: 16px;
+    min-height: 82px;
+    border-radius: 12px;
+    background: rgba(29, 75, 80, .65);
+    border: 1px solid var(--border);
+}
+.model-fact small {
+    display: block;
+    color: var(--teal);
+    font-size: .65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+.model-fact strong { font-size: .9rem; }
+.model-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Glycolysis pathway */
+.glycolysis-model { width: min(100%, 570px); text-align: center; }
+.gly-node {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 150px;
+    min-height: 58px;
+    padding: 9px 14px;
+    border-radius: 13px;
+    color: #eafffb;
+    border: 1px solid rgba(140, 255, 235, .55);
+    background: linear-gradient(145deg, #258f88, #10434d);
+    box-shadow: 0 12px 0 #082c34, 0 17px 25px rgba(0,0,0,.35), inset 0 2px 8px rgba(255,255,255,.2);
+    transform: rotateX(12deg);
+}
+.gly-node small { color: #bce9e1; font-size: .7rem; }
+.glucose-node { background: linear-gradient(145deg, #a56a37, #653d27); }
+.split-node { min-width: 205px; background: linear-gradient(145deg, #9a7b31, #5c4820); }
+.gly-arrow { color: var(--teal); font-size: 1.7rem; line-height: 1.2; text-shadow: 0 0 12px var(--teal); }
+.gly-split, .gly-pair { display: flex; justify-content: center; gap: 22px; }
+.gly-split { color: var(--teal); font-size: 1.4rem; }
+.trio-node { min-width: 125px; background: linear-gradient(145deg, #286eaa, #163c68); }
+.pyruvate-node { min-width: 125px; background: linear-gradient(145deg, #a84f70, #642d4c); }
+.gly-energy { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.gly-energy span, .krebs-output {
+    padding: 7px 11px; border-radius: 20px; color: #ffe7a5;
+    background: rgba(160, 119, 39, .22); border: 1px solid rgba(255, 214, 107, .3); font-size: .75rem;
+}
+
+/* Krebs cycle */
+.krebs-model { width: 390px; height: 330px; max-width: 100%; }
+.krebs-ring {
+    position: absolute; width: 270px; height: 270px; left: 50%; top: 50%;
+    transform: translate(-50%,-50%) rotateX(18deg);
+    border: 13px solid rgba(56, 203, 183, .28); border-radius: 50%;
+    box-shadow: 0 0 28px rgba(53,208,189,.18), inset 0 0 25px rgba(53,208,189,.10);
+}
+.cycle-node {
+    position: absolute; display: grid; place-items: center; width: 92px; height: 48px;
+    border-radius: 12px; color: #f2fffb; font-size: .68rem; font-weight: 900;
+    background: linear-gradient(145deg, #278e88, #123f4a);
+    border: 1px solid rgba(135,255,231,.5);
+    box-shadow: 0 7px 0 #082b32, 0 12px 18px rgba(0,0,0,.35);
+}
+.node-a { top: -23px; left: 76px; }
+.node-b { top: 45px; right: -38px; }
+.node-c { bottom: 35px; right: -32px; }
+.node-d { bottom: -24px; left: 76px; }
+.node-e { bottom: 35px; left: -37px; }
+.node-f { top: 45px; left: -37px; }
+.krebs-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--teal); text-shadow: 0 0 15px rgba(53,208,189,.5);
+}
+.krebs-center span { font-size: 2.6rem; }
+.krebs-output { position: absolute; font-weight: 800; }
+.output-one { left: -10px; top: 2px; }
+.output-two { right: -10px; top: 2px; }
+.output-three { left: 42%; bottom: -8px; }
+
+/* Electron transport chain */
+.etc-model { width: 100%; max-width: 850px; text-align: center; }
+.etc-zone, .etc-matrix, .chemo-space, .chemo-matrix {
+    padding: 18px; color: #c8eeea; font-size: .75rem; letter-spacing: 1.5px; font-weight: 800;
+    background: rgba(31, 117, 111, .18); border: 1px solid rgba(86, 219, 197, .25);
+}
+.etc-zone span { display: block; margin-top: 12px; color: #ffe18b; font-size: 1.2rem; letter-spacing: 8px; animation: protonGlow 2s ease-in-out infinite alternate; }
+.etc-membrane {
+    display: flex; align-items: center; justify-content: space-around; gap: 8px; min-height: 145px; padding: 14px 8px;
+    background: repeating-linear-gradient(180deg, rgba(53,208,189,.25) 0 10px, rgba(18,75,79,.75) 10px 22px, rgba(53,208,189,.25) 22px 32px);
+    border-top: 2px solid rgba(111,238,218,.5); border-bottom: 2px solid rgba(111,238,218,.5);
+}
+.etc-complex {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    width: 86px; min-height: 105px; padding: 8px 4px; border-radius: 16px;
+    background: linear-gradient(145deg, #4aaea1, #14505b); border: 1px solid #9af4dc;
+    box-shadow: 0 10px 0 #0b3038, 0 15px 18px rgba(0,0,0,.35);
+}
+.etc-complex b { font-size: 1.6rem; color: white; }
+.etc-complex small, .etc-complex i { font-size: .62rem; color: #e4fffa; font-style: normal; }
+.etc-complex i { color: #ffe18b; }
+.etc-complex.no-pump { background: linear-gradient(145deg, #657e91, #263d52); }
+.etc-carrier { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; border-radius: 50%; color: #09262c; font-weight: 900; background: #ffd66b; box-shadow: 0 0 18px rgba(255,214,107,.45); }
+.etc-carrier.cyto { background: #b4a1ff; }
+.etc-electrons { padding: 8px; color: #ffd66b; letter-spacing: 4px; }
+.etc-matrix span { display: block; margin-top: 8px; color: var(--teal); font-size: .9rem; letter-spacing: 0; }
+@keyframes protonGlow { to { opacity: .45; text-shadow: 0 0 18px #ffe18b; } }
+
+/* Chemiosmosis / ATP synthase */
+.chemo-model { width: 100%; max-width: 720px; text-align: center; }
+.chemo-space { min-height: 95px; }
+.proton-cloud { display: block; margin-top: 10px; color: #ffe18b; font-size: 1.35rem; letter-spacing: 5px; animation: protonGlow 1.8s ease-in-out infinite alternate; }
+.chemo-membrane {
+    position: relative; height: 112px; display: flex; justify-content: center; align-items: center;
+    background: repeating-linear-gradient(180deg, rgba(53,208,189,.27) 0 12px, #15515a 12px 25px, rgba(53,208,189,.27) 25px 37px);
+    border-block: 2px solid rgba(111,238,218,.5);
+}
+.atp-synthase { position: relative; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 10px 8px rgba(0,0,0,.4)); }
+.atp-head { display: grid; place-items: center; width: 76px; height: 40px; border-radius: 15px 15px 7px 7px; color: #062226; font-weight: 900; background: linear-gradient(145deg, #ffe18b, #b98236); border: 1px solid #fff0b9; }
+.atp-stem { width: 20px; height: 44px; background: linear-gradient(90deg, #b5a1ff, #6c5eb4, #d9d0ff); }
+.atp-head.f1 { border-radius: 10px 10px 18px 18px; background: linear-gradient(145deg, #79e5c2, #258b78); }
+.proton-flow { position: absolute; left: calc(50% + 70px); top: 15px; color: #ffe18b; font-size: 1.4rem; animation: protonDown 1.5s ease-in-out infinite; }
+@keyframes protonDown { 0%,100% { transform: translateY(-8px); opacity: .4; } 50% { transform: translateY(13px); opacity: 1; } }
+.chemo-matrix { min-height: 115px; }
+.atp-reaction { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 14px; font-size: 1.2rem; }
+.atp-reaction strong { color: #ffe18b; font-size: 1.6rem; text-shadow: 0 0 15px rgba(255,214,107,.45); }
+
+/* Final quiz breakdown */
+.final-breakdown-panel {
+    margin: 22px 0;
+    padding: 20px;
+    text-align: left;
+    border-radius: 14px;
+    background: rgba(24, 66, 72, .72);
+    border: 1px solid var(--border);
+}
+.final-breakdown-panel h2 { color: var(--teal); font-size: 1.15rem; }
+.breakdown-intro { margin: 5px 0 18px; font-size: .88rem; }
+.final-breakdown { display: grid; gap: 15px; }
+.breakdown-item { display: grid; gap: 7px; }
+.breakdown-label { font-size: .9rem; }
+.breakdown-label span { color: var(--teal); font-weight: 900; }
+.breakdown-track { height: 9px; overflow: hidden; border-radius: 20px; background: rgba(255,255,255,.10); }
+.breakdown-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #159b91, #5de3c1); transition: width .7s ease; }
+
+@media (max-width: 700px) {
+    .model-panel { padding: 16px; }
+    .model-visual { min-height: 340px; padding: 14px 8px; }
+    .model-facts { grid-template-columns: repeat(2, 1fr); }
+    .model-actions { flex-direction: column; }
+    .model-actions button { width: 100%; }
+    .etc-membrane { gap: 3px; padding: 8px 3px; }
+    .etc-complex { width: 55px; min-height: 88px; }
+    .etc-complex small, .etc-complex i { font-size: .48rem; }
+    .etc-carrier { width: 22px; height: 22px; flex-basis: 22px; font-size: .7rem; }
+    .krebs-model { transform: scale(.82); }
+    .final-stats { grid-template-columns: 1fr 1fr; }
+    .lab-content { padding: 18px; }
+}
+
+.final-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width:700px) { .final-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* RETAIN ORIGINAL BIOLOGIQ LABORATORY PICTURE */
+
+#lab-screen {
+    background-image:
+        linear-gradient(
+            rgba(3, 20, 27, 0.35),
+            rgba(3, 20, 27, 0.55)
+        ),
+        url("./assets/laboratory.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+/* ==========================================
+   BIOLOGIQ SNAKE GAME — BLUE THEME
+========================================== */
+
+:root {
+    --snake-blue: #38bdf8;
+    --snake-blue-light: #7dd3fc;
+    --snake-blue-dark: #075985;
+    --snake-blue-glow: rgba(56, 189, 248, 0.35);
+}
+
+/* Snake game panel */
+#game-screen .game-container,
+#game-screen .snake-container {
+    background: linear-gradient(145deg, #071b35, #102d50);
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 20px var(--snake-blue-glow);
+    border-radius: 16px;
+}
+
+/* Game canvas */
+#game-screen canvas {
+    border: 2px solid var(--snake-blue);
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--snake-blue-glow);
+}
+
+/* Game buttons */
+#game-screen button {
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    color: #ffffff;
+    border: 1px solid #7dd3fc;
+    transition: 0.25s ease;
+}
+
+#game-screen button:hover {
+    background: linear-gradient(135deg, #38bdf8, #1d4ed8);
+    box-shadow: 0 0 15px var(--snake-blue-glow);
+}
+
+/* Game headings and score */
+#game-screen h1,
+#game-screen h2,
+#game-screen .score,
+#game-screen .game-score {
+    color: var(--snake-blue-light);
+    text-shadow: 0 0 10px var(--snake-blue-glow);
+}
+/* ==========================================
+   REPLAY SNAKE GAME BUTTON — BLUE THEME
+========================================== */
+
+#replay-snake-btn {
+    display: block;
+    margin: 15px auto;
+    padding: 13px 24px;
+
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    color: white;
+
+    border: 1px solid #7dd3fc;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+    transition: 0.3s ease;
+}
+
+#replay-snake-btn:hover {
+    background: linear-gradient(135deg, #38bdf8, #1d4ed8);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
